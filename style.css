@@ -1,1 +1,56 @@
-/* Add styles here */
+:root {
+    --color-primary: #06103A;   
+    --color-secondary: #00405B; 
+    --color-accent: #32789E;     
+    --color-light-accent: #91D5D0;
+    --color-background: #D8F6FB;
+}
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--color-background);
+}
+/* Estilos de Botão Comum */
+.control-btn {
+    @apply px-4 py-3 font-semibold rounded-xl transition duration-200 shadow-md flex items-center justify-center;
+}
+/* Estilo do Slider */
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 8px;
+    cursor: pointer;
+    background: var(--color-light-accent);
+    border-radius: 4px;
+}
+
+/*  Cor Power Button */
+.power-icon-on {
+    color: #10B981;
+}
+.power-icon-off {
+    color: #F87171; 
+}
+
+/* centralizar o botão Power */
+.center-power-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.atomizer-content {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centraliza o ícone e o texto horizontalmente */
+    width: 100%; 
+}

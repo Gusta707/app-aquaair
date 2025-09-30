@@ -1,14 +1,103 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Umidificador Inteligente - Controle</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 </head>
-<body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
+<body class="flex items-center justify-center min-h-screen p-4">
+
+    
+    <div class="bg-[var(--color-secondary)] p-8 rounded-2xl shadow-2xl max-w-lg w-full text-center">
+
+        <h1 class="text-3xl font-bold text-white mb-2">Umidificador Inteligente</h1>
+        <p class="text-[var(--color-light-accent)] mb-6">Monitoramento e Controle Remoto</p>
+
+        <!-- Seção de Status do Sistema -->
+        <div class="mb-6 p-4 bg-[var(--color-primary)] rounded-xl shadow-inner">
+            <h2 class="text-lg font-semibold text-white mb-3">Controle Global do Protótipo</h2>
+            
+            <!-- Centralização do Botão Principal -->
+            <div class="center-power-button">
+                <!-- Botão de Ligar/Desligar Principal (com Ícone SVG) -->
+                <button id="mainPowerButton" class="control-btn bg-white hover:bg-gray-100 active:scale-[.98] transition-colors p-2">
+                 
+                    <svg id="powerIcon" class="w-16 h-16 power-icon-off transition-colors duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path>
+                        <line x1="12" y1="2" x2="12" y2="12"></line>
+                    </svg>
+                </button>
+            </div>
+            <p id="systemStatusDisplay" class="mt-2 text-sm font-medium text-red-300">Protótipo: Desligado</p>
+        </div>
+        
+        <!-- Grid de Leituras e Indicadores -->
+        <div class="grid grid-cols-2 gap-4 mb-6">
+            
+            <!-- Dados de Temperatura -->
+            <div class="bg-[var(--color-light-accent)] p-4 rounded-xl shadow-md">
+                <p class="text-base font-semibold text-[var(--color-secondary)]">Temperatura</p>
+                <p id="temperatura" class="text-3xl font-extrabold text-[var(--color-accent)] mt-1">-°C</p>
+            </div>
+
+            <!-- Dados de Umidade -->
+            <div class="bg-[var(--color-light-accent)] p-4 rounded-xl shadow-md">
+                <p class="text-base font-semibold text-[var(--color-secondary)]">Umidade</p>
+                <p id="umidade" class="text-3xl font-extrabold text-[var(--color-accent)] mt-1">-%</p>
+            </div>
+
+            <!-- Indicador de Nível da Água -->
+            <div class="col-span-2 bg-[var(--color-light-accent)] p-4 rounded-xl shadow-md flex items-center justify-between">
+                <p class="text-base font-semibold text-[var(--color-secondary)]">Nível da Água:</p>
+                <span id="waterLevelIndicator" class="px-3 py-1 text-sm font-bold rounded-full text-white bg-gray-500">
+                    Aguardando...
+                </span>
+            </div>
+        </div>
+
+        
+        <div class="space-y-4 mb-6 p-4 bg-[var(--color-primary)] rounded-xl shadow-inner">
+            <h2 class="text-lg font-semibold text-white">Controle de Saídas</h2>
+
+            <!-- Controle do Atomizador -->
+            <div>
+                <label class="block text-left text-sm font-medium text-white mb-1">Módulo Atomizador de Névoa</label>
+                <!-- O botão usa 'flex', 'justify-center' e 'items-center' para centralizar o conteúdo -->
+                <button id="atomizerToggleButton" class="control-btn w-full bg-[var(--color-accent)] hover:bg-[#2a688d] active:scale-[.98] transition-colors">
+                    <div class="atomizer-content">
+                        <!-- Icone Fumaça  -->
+                        <svg id="atomizerIcon" class="w-8 h-8 mr-2 text-white fill-current transition-colors duration-300" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+                            <!-- SVG do ícone de fumaça / chama -->
+                            <path d="M165.7 348.6c-48.3-25.2-86.8-63.1-103.6-118-20.4-66.8 1.9-130.6 59.8-150.3 35.8-12 70.8 1.6 97.4 28.5 26.6 26.8 45 61.3 46.2 98.7 1.2 37.5-12 73-39.7 97.4-27.7 24.3-64.8 39.8-100.1 43.7zM286.7 428.6c-48.4-25.2-86.9-63.1-103.6-118-20.4-66.8 1.9-130.6 59.8-150.3 35.8-12 70.8 1.6 97.4 28.5 26.6 26.8 45 61.3 46.2 98.7 1.2 37.5-12 73-39.7 97.4-27.7 24.3-64.8 39.8-100.1 43.7z"/>
+                        </svg>
+                        <span id="atomizerButtonText">Ligar Neblina</span>
+                    </div>
+                </button>
+                <p id="atomizerStatus" class="mt-1 text-xs text-red-300">Status: Desligado</p>
+            </div>
+
+            <!-- Controle de Velocidade da Ventoinha -->
+            <div>
+                <label for="fanSpeedSlider" class="block text-left text-sm font-medium text-white mb-1">
+                    Velocidade da Ventoinha: <span id="fanSpeedValue">0%</span> (PWM: 0)
+                </label>
+                <input type="range" min="0" max="100" value="0" id="fanSpeedSlider" class="w-full h-2 rounded-lg appearance-none cursor-pointer mt-2" oninput="updateFanSpeedDisplay(this.value)" onchange="setFanSpeed(this.value)">
+            </div>
+        </div>
+
+        <!-- Indicadores de Status e Erro -->
+        <p id="statusMessage" class="mt-6 text-sm text-[var(--color-light-accent)]"></p>
+        <div id="connectionHint" class="mt-4 p-3 bg-red-800 border border-red-400 text-red-200 rounded-lg text-xs hidden text-left shadow-md">
+            <strong class="font-bold">Dica de Conexão:</strong> O erro "Failed to fetch" geralmente significa que o navegador não conseguiu se conectar ou que o *CORS* está bloqueando.
+            <ul class="list-disc list-inside mt-1 space-y-1">
+                <li>Verifique se o *IP do ESP32* está correto na variável <code class="font-mono">esp32Ip</code> (atualmente: <code class="font-mono">192.168.1.100</code>).</li>
+                <li>Verifique se o código do seu ESP32 possui as *novas rotas* para os botões de controle.</li>
+            </ul>
+        </div>
+
+    </div>
 </body>
 </html>
