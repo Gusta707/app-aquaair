@@ -1,56 +1,124 @@
 :root {
-    --color-primary: #06103A;   
-    --color-secondary: #00405B; 
-    --color-accent: #32789E;     
+    --color-primary: #06103A;
+    --color-secondary: #00405B;
+    --color-accent: #32789E;
     --color-light-accent: #91D5D0;
     --color-background: #D8F6FB;
+    --power-on-color: #10B981;
+    --power-off-color: #F87171;
 }
+
 body {
     font-family: 'Inter', sans-serif;
     background-color: var(--color-background);
-}
-/* Estilos de Botão Comum */
-.control-btn {
-    @apply px-4 py-3 font-semibold rounded-xl transition duration-200 shadow-md flex items-center justify-center;
-}
-/* Estilo do Slider */
-input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: var(--color-accent);
-    cursor: pointer;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-}
-input[type=range]::-webkit-slider-runnable-track {
-    width: 100%;
-    height: 8px;
-    cursor: pointer;
-    background: var(--color-light-accent);
-    border-radius: 4px;
-}
-
-/*  Cor Power Button */
-.power-icon-on {
-    color: #10B981;
-}
-.power-icon-off {
-    color: #F87171; 
-}
-
-/* centralizar o botão Power */
-.center-power-button {
+    color: var(--color-primary);
+    margin: 0;
+    padding: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: 100vh;
+}
+
+.container {
     width: 100%;
+    max-width: 600px;
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 2rem;
+    color: var(--color-primary);
+    margin-bottom: 5px;
+}
+
+#statusMessage {
+    font-size: 1rem;
+    color: var(--color-secondary);
+}
+
+.hidden {
+    display: none;
+}
+
+.sensor-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.sensor-card {
+    background-color: var(--color-light-accent);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.sensor-label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-secondary);
+}
+
+.sensor-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-accent);
+}
+
+.control-panel {
+    display: grid;
+    gap: 20px;
+}
+
+.control-card {
+    background-color: #f0f4f8;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.control-btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s, color 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.power-btn {
+    width: 100%;
+    justify-content: center;
+}
+
+.power-icon-on {
+    color: var(--power-on-color);
+}
+
+.power-icon-off {
+    color: var(--power-off-color);
 }
 
 .atomizer-content {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center; /* Centraliza o ícone e o texto horizontalmente */
-    width: 100%; 
+}
+
+.slider {
+    width: 100%;
+    cursor: pointer;
 }
